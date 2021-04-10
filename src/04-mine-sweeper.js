@@ -21,8 +21,79 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function minesweeper(matrix) {
+  const arr = [];
+  const height = matrix.length;
+  const width = matrix[0].length;
+  for (let i = 0; i < height; i++) {
+    const newArr = [];
+    for (let j = 0; j < width; j++) {
+      let counter = 0;
+      if (matrix[i][j]) {
+        newArr.push(1);
+      } else if (j === 0) {
+        if (i === 0) {
+          counter += matrix[i][j + 1] ? 1 : 0;
+          counter += matrix[i + 1][j] ? 1 : 0;
+          counter += matrix[i + 1][j + 1] ? 1 : 0;
+        } else if (i === height - 1) {
+          counter += matrix[i][j + 1] ? 1 : 0;
+          counter += matrix[i - 1][j] ? 1 : 0;
+          counter += matrix[i - 1][j + 1] ? 1 : 0;
+        } else {
+          counter += matrix[i][j + 1] ? 1 : 0;
+          counter += matrix[i - 1][j] ? 1 : 0;
+          counter += matrix[i - 1][j + 1] ? 1 : 0;
+          counter += matrix[i + 1][j] ? 1 : 0;
+          counter += matrix[i + 1][j + 1] ? 1 : 0;
+        }
+        newArr.push(counter);
+      } else if (j === width - 1) {
+        if (i === 0) {
+          counter += matrix[i][j - 1] ? 1 : 0;
+          counter += matrix[i + 1][j] ? 1 : 0;
+          counter += matrix[i + 1][j - 1] ? 1 : 0;
+        } else if (i === height - 1) {
+          counter += matrix[i][j - 1] ? 1 : 0;
+          counter += matrix[i - 1][j] ? 1 : 0;
+          counter += matrix[i - 1][j - 1] ? 1 : 0;
+        } else {
+          counter += matrix[i][j - 1] ? 1 : 0;
+          counter += matrix[i + 1][j] ? 1 : 0;
+          counter += matrix[i + 1][j - 1] ? 1 : 0;
+          counter += matrix[i - 1][j] ? 1 : 0;
+          counter += matrix[i - 1][j - 1] ? 1 : 0;
+        }
+        newArr.push(counter);
+      } else {
+        if (i === 0) {
+          counter += matrix[i][j - 1] ? 1 : 0;
+          counter += matrix[i][j + 1] ? 1 : 0;
+          counter += matrix[i + 1][j - 1] ? 1 : 0;
+          counter += matrix[i + 1][j] ? 1 : 0;
+          counter += matrix[i + 1][j + 1] ? 1 : 0;
+        } else if (i === height - 1) {
+          counter += matrix[i - 1][j - 1] ? 1 : 0;
+          counter += matrix[i - 1][j] ? 1 : 0;
+          counter += matrix[i - 1][j + 1] ? 1 : 0;
+          counter += matrix[i][j - 1] ? 1 : 0;
+          counter += matrix[i][j + 1] ? 1 : 0;
+        } else {
+          counter += matrix[i - 1][j - 1] ? 1 : 0;
+          counter += matrix[i - 1][j] ? 1 : 0;
+          counter += matrix[i - 1][j + 1] ? 1 : 0;
+          counter += matrix[i][j - 1] ? 1 : 0;
+          counter += matrix[i][j + 1] ? 1 : 0;
+          counter += matrix[i + 1][j - 1] ? 1 : 0;
+          counter += matrix[i + 1][j] ? 1 : 0;
+          counter += matrix[i + 1][j + 1] ? 1 : 0;
+        }
+        newArr.push(counter);
+      }
+    }
+    arr.push(newArr);
+  }
+  return arr;
 }
 
 module.exports = minesweeper;
